@@ -1,0 +1,128 @@
+modbus:
+  port: COM6
+  rate: 9600
+influx:
+  token: token
+  url: http://host:8086/
+  org: org-name
+  bucket: bucket-name
+mqtt:
+  url: tcp://host
+devices:
+  - deviceId: 1
+    topic: /DEYE
+    data:
+      - topic: /grid/in/phase
+        startRegister: 598
+        numberRegisters: 3
+        type: 3
+        registers:
+          - {factor: 0.1, name: Grid phase voltage A, offset: 0, topic: /A/voltage, type: U16}
+          - {factor: 0.1, name: Grid phase voltage B, offset: 1, topic: /B/voltage, type: U16}
+          - {factor: 0.1, name: Grid phase voltage C, offset: 2, topic: /C/voltage, type: U16}
+      - topic: ''
+        startRegister: 604
+        numberRegisters: 22
+        type: 3
+        registers:
+          - { factor: 1, name: A phase power on the inner side of the grid, offset: 0, topic: /grid/in/phase/A/power, type: S16}
+          - { factor: 1, name: B phase power on the inner side of the grid, offset: 1, topic: /grid/in/phase/B/power, type: S16}
+          - { factor: 1, name: C phase power on the inner side of the grid, offset: 2, topic: /grid/in/phase/C/power, type: S16}
+          - { factor: 1, name: Total active power from side to side of the grid, offset: 3, topic: /grid/in/phase/total/pover/side2side, type: S16}
+          - { factor: 1, name: Grid side - inside total apparent power, offset: 4, topic: /grid/in/phase/total/pover/apparent, type: U16}
+          - { factor: 0.01, name: Grid-side frequency, offset: 5, topic: /grid/frequency, type: U16}
+          - { factor: 0.01, name: grid side inner current A, offset: 6, topic: /grid/in/phase/A/current, type: S16}
+          - { factor: 0.01, name: grid side inner current B, offset: 7, topic: /grid/in/phase/B/current, type: S16}
+          - { factor: 0.01, name: grid side inner current C, offset: 8, topic: /grid/in/phase/C/current, type: S16}
+          - { factor: 0.01, name: Out-of-grid - current A, offset: 9, topic: /grid/out/phase/A/current, type: S16}
+          - { factor: 0.01, name: Out-of-grid - current B, offset: 10, topic: /grid/out/phase/B/current, type: S16}
+          - { factor: 0.01, name: Out-of-grid - current C, offset: 11, topic: /grid/out/phase/C/current, type: S16}
+          - { factor: 1, name: Out-of-grid - power A, offset: 12, topic: /grid/out/phase/A/power, type: S16}
+          - { factor: 1, name: Out-of-grid - power B, offset: 13, topic: /grid/out/phase/B/power, type: S16}
+          - { factor: 1, name: Out-of-grid - power C, offset: 14, topic: /grid/out/phase/C/power, type: S16}
+          - { factor: 1, name: Out-of-grid –total power, offset: 15, topic: /grid/out/phase/total/power, type: S16}
+          - { factor: 1, name: Out-of-grid –total apparent power, offset: 16, topic: /grid/out/phase/total/power/apparent, type: U16}
+          - { factor: 1, name: Grid-connected power factor PF, offset: 17, topic: /grid/powerPF, type: U16}
+          - { factor: 1, name: Grid side A-phase power, offset: 18, topic: /grid/side/phase/A/power, type: U16}
+          - { factor: 1, name: Grid side B-phase power, offset: 19, topic: /grid/side/phase/B/power, type: U16}
+          - { factor: 1, name: Grid side C-phase power, offset: 20, topic: /grid/side/phase/C/power, type: U16}
+          - { factor: 1, name: Grid side total power, offset: 21, topic: /grid/side/phase/total/power, type: U16}
+      - topic: ''
+        startRegister: 627
+        numberRegisters: 11
+        type: 3
+        registers:
+          - {factor: 0.1, name: Inverter output phase voltage A, offset: 0, topic: /inverter/output/phase/A/voltage, type: U16}
+          - {factor: 0.1, name: Inverter output phase voltage B, offset: 1, topic: /inverter/output/phase/B/voltage, type: U16}
+          - {factor: 0.1, name: Inverter output phase voltage C, offset: 2, topic: /inverter/output/phase/C/voltage, type: U16}
+          - {factor: 0.01, name: Inverter output phase current A, offset: 3, topic: /inverter/output/phase/A/current, type: S16}
+          - {factor: 0.01, name: Inverter output phase current B, offset: 4, topic: /inverter/output/phase/B/current, type: S16}
+          - {factor: 0.01, name: Inverter output phase current C, offset: 5, topic: /inverter/output/phase/C/current, type: S16}
+          - {factor: 1, name: Inverter output phase power A, offset: 6, topic: /inverter/output/phase/A/power, type: S16}
+          - {factor: 1, name: Inverter output phase power B, offset: 7, topic: /inverter/output/phase/B/power, type: S16}
+          - {factor: 1, name: Inverter output phase power C, offset: 8, topic: /inverter/output/phase/C/power, type: S16}
+          - {factor: 1, name: Inverter output total power, offset: 9, topic: /inverter/output/phase/total/power, type: S16}
+          - {factor: 1, name: Inverter output total apparent power, offset: 10, topic: /inverter/output/phase/total/power/apparent, type: S16}
+      - topic: ''
+        startRegister: 640
+        numberRegisters: 16
+        type: 3
+        registers:
+          - {factor: 1, name: UPS load-side phase power A, offset: 0, topic: /inverter/ups/load/phase/A/power, type: U16}
+          - {factor: 1, name: UPS load-side phase power B, offset: 1, topic: /inverter/ups/load/phase/B/power, type: U16}
+          - {factor: 1, name: UPS load-side phase power C, offset: 2, topic: /inverter/ups/load/phase/C/power, type: U16}
+          - {factor: 1, name: UPS load-side phase power C, offset: 3, topic: /inverter/ups/load/phase/total/power, type: U16}
+          - {factor: 0.1, name: Load phase voltage A, offset: 4, topic: /inverter/load/phase/A/voltage, type: U16}
+          - {factor: 0.1, name: Load phase voltage B, offset: 5, topic: /inverter/load/phase/B/voltage, type: U16}
+          - {factor: 0.1, name: Load phase voltage C, offset: 6, topic: /inverter/load/phase/C/voltage, type: U16}
+          - { factor: 0.01, name: Load phase current A no use, offset: 7, topic: /inverter/load/phase/A/current, type: S16 }
+          - { factor: 0.01, name: Load phase current B no use, offset: 8, topic: /inverter/load/phase/B/current, type: S16 }
+          - { factor: 0.01, name: Load phase current C no use, offset: 9, topic: /inverter/load/phase/C/current, type: S16 }
+          - { factor: 1, name: Load phase power A, offset: 10, topic: /inverter/load/phase/A/power, type: S16 }
+          - { factor: 1, name: Load phase power B, offset: 11, topic: /inverter/load/phase/B/power, type: S16 }
+          - { factor: 1, name: Load phase power C, offset: 12, topic: /inverter/load/phase/C/power, type: S16 }
+          - { factor: 1, name: Load phase power total, offset: 13, topic: /inverter/load/phase/total/power, type: S16 }
+          - { factor: 1, name: Load phase power total, offset: 14, topic: /inverter/load/phase/total/powe/apparent, type: S16 }
+          - { factor: 0.01, name: Load phase power A, offset: 15, topic: /inverter/load/frequency, type: U16 }
+      - topic: ''
+        startRegister: 672
+        numberRegisters: 12
+        type: 3
+        registers:
+          - {factor: 1, name: PV1 input power, offset: 0, topic: /inverter/input/pv/dc/power/1, type: U16}
+          - {factor: 1, name: PV2 input power, offset: 1, topic: /inverter/input/pv/dc/power/2, type: U16}
+          - {factor: 1, name: PV3 input power, offset: 2, topic: /inverter/input/pv/dc/power/3, type: U16}
+          - {factor: 1, name: PV4 input power, offset: 3, topic: /inverter/input/pv/dc/power/4, type: U16}
+          - {factor: 0.1, name: Dc voltage 1, offset: 4, topic: /inverter/input/pv/dc/voltage/1, type: U16}
+          - {factor: 0.1, name: Dc current 1, offset: 5, topic: /inverter/input/pv/dc/current/1, type: U16}
+          - {factor: 0.1, name: Dc voltage 2, offset: 6, topic: /inverter/input/pv/dc/voltage/2, type: U16}
+          - {factor: 0.1, name: Dc current 2, offset: 7, topic: /inverter/input/pv/dc/current/2, type: U16}
+          - {factor: 0.1, name: Dc voltage 3, offset: 8, topic: /inverter/input/pv/dc/voltage/3, type: U16}
+          - {factor: 0.1, name: Dc current 3, offset: 9, topic: /inverter/input/pv/dc/current/3, type: U16}
+          - {factor: 0.1, name: Dc voltage 4, offset: 10, topic: /inverter/input/pv/dc/voltage/4, type: U16}
+          - {factor: 0.1, name: Dc current 4, offset: 11, topic: /inverter/input/pv/dc/current/4, type: U16}
+      - topic: ''
+        startRegister: 514
+        numberRegisters: 20
+        type: 3
+        registers:
+          - {factor: 0.1, name: Today charge of the battery, offset: 0, topic: /inverter/stat/battery/charge/today, type: U16}
+          - {factor: 0.1, name: Today discharge	of the battery, offset: 1, topic: /inverter/stat/battery/discharge/today, type: U16}
+          - {factor: 0.1, name: Total charge of the battery low byte, offset: 2, topic: /inverter/stat/battery/charge/total/low, type: U16}
+          - {factor: 0.1, name: Total charge of the battery high byte, offset: 3, topic: /inverter/stat/battery/charge/total/high, type: U16}
+          - {factor: 0.1, name: Total discharge of the battery low byte, offset: 4, topic: /inverter/stat/battery/discharge/total/low, type: U16}
+          - {factor: 0.1, name: Total discharge of the battery high byte, offset: 5, topic: /inverter/stat/battery/discharge/total/high, type: U16}
+          - {factor: 0.1, name: Day_GridBuy_Power Wh, offset: 6, topic: /inverter/stat/grid/power/buy/today, type: U16}
+          - {factor: 0.1, name: Day_GridSell_Power Wh, offset: 7, topic: /inverter/stat/grid/power/sell/today, type: U16}
+          - {factor: 0.1, name: Total_GridBuy_Power Wh_low word, offset: 8, topic: /inverter/stat/grid/power/buy/total/low, type: U16}
+          - {factor: 0.1, name: Total_GridBuy_Power Wh_high word, offset: 9, topic: /inverter/stat/grid/power/buy/total/high, type: U16}
+          - {factor: 0.1, name: Day_Load_Power Wh, offset: 10, topic: /inverter/stat/power/load/day, type: U16}
+          - {factor: 0.1, name: Total_Load_Power Wh_low word, offset: 11, topic: /inverter/stat/power/load/day/total/low, type: U16}
+          - {factor: 0.1, name: Total_Load_Power Wh_high word, offset: 12, topic: /inverter/stat/power/load/day/total/high, type: U16}
+          - {factor: 0.1, name: Day_PV_Power Wh, offset: 13, topic: /inverter/stat/power/pv/day, type: U16}
+          - {factor: 0.1, name: Day_PV-1_Power Wh, offset: 14, topic: /inverter/stat/power/pv1/day, type: U16}
+          - {factor: 0.1, name: Day_PV-2_Power Wh, offset: 15, topic: /inverter/stat/power/pv2/day, type: U16}
+          - {factor: 0.1, name: Day_PV-3_Power Wh, offset: 16, topic: /inverter/stat/power/pv3/day, type: U16}
+          - {factor: 0.1, name: Day_PV-4_Power Wh, offset: 17, topic: /inverter/stat/power/pv4/day, type: U16}
+          - {factor: 0.1, name: Total	PV_power	Wh_low word, offset: 18, topic: /inverter/stat/power/pv/total/low, type: U16}
+          - {factor: 0.1, name: Total	PV_power	Wh_high word, offset: 19, topic: /inverter/stat/power/pv/total/hihg, type: U16}

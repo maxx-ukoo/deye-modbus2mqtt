@@ -1,0 +1,4 @@
+/target
+/.idea
+/modbus2mqtt.iml
+/config.yaml
