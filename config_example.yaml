@@ -103,26 +103,28 @@ devices:
           - {factor: 0.1, name: Dc current 4, offset: 11, topic: /inverter/input/pv/dc/current/4, type: U16}
       - topic: ''
         startRegister: 514
-        numberRegisters: 20
+        numberRegisters: 22
         type: 3
         registers:
-          - {factor: 0.1, name: Today charge of the battery, offset: 0, topic: /inverter/stat/battery/charge/today, type: U16}
-          - {factor: 0.1, name: Today discharge	of the battery, offset: 1, topic: /inverter/stat/battery/discharge/today, type: U16}
-          - {factor: 0.1, name: Total charge of the battery low byte, offset: 2, topic: /inverter/stat/battery/charge/total/low, type: U16}
-          - {factor: 0.1, name: Total charge of the battery high byte, offset: 3, topic: /inverter/stat/battery/charge/total/high, type: U16}
-          - {factor: 0.1, name: Total discharge of the battery low byte, offset: 4, topic: /inverter/stat/battery/discharge/total/low, type: U16}
-          - {factor: 0.1, name: Total discharge of the battery high byte, offset: 5, topic: /inverter/stat/battery/discharge/total/high, type: U16}
-          - {factor: 0.1, name: Day_GridBuy_Power Wh, offset: 6, topic: /inverter/stat/grid/power/buy/today, type: U16}
-          - {factor: 0.1, name: Day_GridSell_Power Wh, offset: 7, topic: /inverter/stat/grid/power/sell/today, type: U16}
-          - {factor: 0.1, name: Total_GridBuy_Power Wh_low word, offset: 8, topic: /inverter/stat/grid/power/buy/total/low, type: U16}
-          - {factor: 0.1, name: Total_GridBuy_Power Wh_high word, offset: 9, topic: /inverter/stat/grid/power/buy/total/high, type: U16}
-          - {factor: 0.1, name: Day_Load_Power Wh, offset: 10, topic: /inverter/stat/power/load/day, type: U16}
-          - {factor: 0.1, name: Total_Load_Power Wh_low word, offset: 11, topic: /inverter/stat/power/load/day/total/low, type: U16}
-          - {factor: 0.1, name: Total_Load_Power Wh_high word, offset: 12, topic: /inverter/stat/power/load/day/total/high, type: U16}
-          - {factor: 0.1, name: Day_PV_Power Wh, offset: 13, topic: /inverter/stat/power/pv/day, type: U16}
-          - {factor: 0.1, name: Day_PV-1_Power Wh, offset: 14, topic: /inverter/stat/power/pv1/day, type: U16}
-          - {factor: 0.1, name: Day_PV-2_Power Wh, offset: 15, topic: /inverter/stat/power/pv2/day, type: U16}
-          - {factor: 0.1, name: Day_PV-3_Power Wh, offset: 16, topic: /inverter/stat/power/pv3/day, type: U16}
-          - {factor: 0.1, name: Day_PV-4_Power Wh, offset: 17, topic: /inverter/stat/power/pv4/day, type: U16}
-          - {factor: 0.1, name: Total	PV_power	Wh_low word, offset: 18, topic: /inverter/stat/power/pv/total/low, type: U16}
-          - {factor: 0.1, name: Total	PV_power	Wh_high word, offset: 19, topic: /inverter/stat/power/pv/total/hihg, type: U16}
+          - {factor: 0.1, name: Today charge of the battery, offset: 0, topic: /inverter/stat/battery/charge/today, type: U16} #514
+          - {factor: 0.1, name: Today discharge	of the battery, offset: 1, topic: /inverter/stat/battery/discharge/today, type: U16} #515
+          - {factor: 0.1, name: Total charge of the battery low byte, offset: 2, topic: /inverter/stat/battery/charge/total/low, type: U16} #516
+          - {factor: 0.1, name: Total charge of the battery high byte, offset: 3, topic: /inverter/stat/battery/charge/total/high, type: U16} #517
+          - {factor: 0.1, name: Total discharge of the battery low byte, offset: 4, topic: /inverter/stat/battery/discharge/total/low, type: U16} #518
+          - {factor: 0.1, name: Total discharge of the battery high byte, offset: 5, topic: /inverter/stat/battery/discharge/total/high, type: U16} #519
+          - {factor: 0.1, name: Day_GridBuy_Power Wh, offset: 6, topic: /inverter/stat/grid/power/buy/today, type: U16} #520
+          - {factor: 0.1, name: Day_GridSell_Power Wh, offset: 7, topic: /inverter/stat/grid/power/sell/today, type: U16} #521
+          - {factor: 0.1, name: Total_GridBuy_Power Wh_low word, offset: 8, topic: /inverter/stat/grid/power/buy/total/low, type: U16} #522
+          - {factor: 0.1, name: Total_GridBuy_Power Wh_high word, offset: 9, topic: /inverter/stat/grid/power/buy/total/high, type: U16} #523
+          - { factor: 0.1, name: Total_GridSell_Power Wh_low word, offset: 10, topic: /inverter/stat/grid/power/sell/total/low, type: U16 } #524
+          - { factor: 0.1, name: Total_GridSell_Power Wh_high word, offset: 11, topic: /inverter/stat/grid/power/sell/total/high, type: U16 } #525
+          - {factor: 0.1, name: Day_Load_Power Wh, offset: 12, topic: /inverter/stat/power/load/day, type: U16} #526
+          - {factor: 0.1, name: Total_Load_Power Wh_low word, offset: 13, topic: /inverter/stat/power/load/day/total/low, type: U16} #527
+          - {factor: 0.1, name: Total_Load_Power Wh_high word, offset: 14, topic: /inverter/stat/power/load/day/total/high, type: U16} #528
+          - {factor: 0.1, name: Day_PV_Power Wh, offset: 15, topic: /inverter/stat/power/pv/day, type: U16} #529
+          - {factor: 0.1, name: Day_PV-1_Power Wh, offset: 16, topic: /inverter/stat/power/pv1/day, type: U16} #530
+          - {factor: 0.1, name: Day_PV-2_Power Wh, offset: 17, topic: /inverter/stat/power/pv2/day, type: U16} #531
+          - {factor: 0.1, name: Day_PV-3_Power Wh, offset: 18, topic: /inverter/stat/power/pv3/day, type: U16} #532
+          - {factor: 0.1, name: Day_PV-4_Power Wh, offset: 19, topic: /inverter/stat/power/pv4/day, type: U16} #533
+          - {factor: 0.1, name: Total PV_power Wh_low word, offset: 20, topic: /inverter/stat/power/pv/total/low, type: U16} #534
+          - {factor: 0.1, name: Total PV_power Wh_high word, offset: 21, topic: /inverter/stat/power/pv/total/hihg, type: U16} #535
