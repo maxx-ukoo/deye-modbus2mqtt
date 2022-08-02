@@ -49,7 +49,7 @@ public class Starter {
             BridgeTask bridgeTask = new BridgeTask(mqttSender, modbusService, config);
             bridgeTask.addListener(influxDb);
             Timer timer1 = new Timer();
-            timer1.schedule(bridgeTask, Starter.getNextStartDate(), 5000);
+            timer1.schedule(bridgeTask, Starter.getNextStartDate(), 10000);
             logger.info("Bridge Timer scheduled");
         } catch (Exception e) {
             logger.error("Error starting app", e);
