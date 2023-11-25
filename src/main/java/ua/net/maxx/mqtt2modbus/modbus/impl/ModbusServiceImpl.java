@@ -9,6 +9,7 @@ import com.ghgande.j2mod.modbus.util.SerialParameters;
 import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.atomic.AtomicInteger;
 import ua.net.maxx.mqtt2modbus.config.Device;
 import ua.net.maxx.mqtt2modbus.config.ValueType;
 import ua.net.maxx.mqtt2modbus.modbus.ModbusService;
@@ -19,12 +20,11 @@ import org.apache.logging.log4j.Logger;
 public class ModbusServiceImpl implements ModbusService {
 
     private static Logger logger = LogManager.getLogger();
+    private AtomicInteger errorCount = new AtomicInteger(0);
 
-    private final SerialParameters portParams;
     private final AbstractModbusMaster master;
 
     public ModbusServiceImpl(SerialParameters portParams) throws Exception {
-        this.portParams = portParams;
         this.master = new ModbusSerialMaster(portParams);
         this.master.setTimeout(1000);
         this.master.setRetries(1);
@@ -43,6 +43,18 @@ public class ModbusServiceImpl implements ModbusService {
 
     @Override
     public Map<String, String> getData(Device device) {
+        if (errorCount.get() > 1) {
+            logger.error("Errors count: {}", errorCount.get());
+        }
+        if (errorCount.get() > 5) {
+            try {
+                logger.error("Found 5 errors, master isConnect={}", master.isConnected());
+                master.disconnect();
+                master.connect();
+            } catch (Exception e) {
+                logger.error("Can't reopen port", e);
+            }
+        }
         logger.debug("Start getting data for device: {}", device.getDeviceId());
         Map<String, String> data = new HashMap<>();
         String deviceTopic = device.getTopic();
@@ -68,9 +80,12 @@ public class ModbusServiceImpl implements ModbusService {
                         String topic = deviceTopic + description.getTopic() + register.getTopic();
                         data.put(topic, value.toString());
                     });
+                    errorCount.set(0);
                 }
+
             } catch (Exception e) {
-                logger.error("Error on get modbus data: {}", e.getMessage());
+                errorCount.addAndGet(1);
+                logger.error("Error on get modbus data", e.getMessage());
             }
         });
         logger.debug("Finish getting data for device: {}", device.getDeviceId());

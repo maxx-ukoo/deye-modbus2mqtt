@@ -1,6 +1,8 @@
 package ua.net.maxx.mqtt2modbus;
 
+import com.fazecast.jSerialComm.SerialPort;
 import com.ghgande.j2mod.modbus.Modbus;
+import com.ghgande.j2mod.modbus.net.SerialConnection;
 import com.ghgande.j2mod.modbus.util.SerialParameters;
 import java.io.BufferedInputStream;
 import java.io.FileInputStream;
@@ -60,6 +62,31 @@ public class AppTest {
                         System.out.println(item);*/
                     });
         });
+
+
+    }
+
+    @Test
+    public void sendDataTest() {
+
+        SerialParameters portParams = new SerialParameters();
+        portParams.setPortName("COM3");
+        portParams.setBaudRate(115200);
+        portParams.setStopbits(1);
+        portParams.setParity(0);
+        portParams.setEncoding(Modbus.SERIAL_ENCODING_RTU);
+
+        byte[] requestArray_v0 = {0x4E, 0x57, 0x00, 0x13, 0x00, 0x00, 0x00, 0x00, 0x06, 0x03, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x68, 0x00, 0x00, 0x01, 0x29};
+        SerialConnection jSerialCommPort = new SerialConnection(portParams);
+        try {
+            jSerialCommPort.open();
+            for (int i=0; i<100000; i++) {
+                jSerialCommPort.writeBytes(requestArray_v0, 1);
+                Thread.sleep(20);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
 
     }

@@ -1,10 +1,8 @@
 package ua.net.maxx.mqtt2modbus.timer;
 
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.SortedMap;
 import java.util.TimerTask;
 import ua.net.maxx.mqtt2modbus.config.Device;
 import ua.net.maxx.mqtt2modbus.modbus.ModbusService;
