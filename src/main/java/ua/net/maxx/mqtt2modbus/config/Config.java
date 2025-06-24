@@ -41,4 +41,14 @@ public class Config {
     public void setInflux(InfluxDbConfig influx) {
         this.influx = influx;
     }
+
+    @Override
+    public String toString() {
+        return "Config{" +
+                "modbus=" + modbus +
+                ", influx=" + influx +
+                ", mqtt=" + mqtt +
+                ", devices=" + devices +
+                '}';
+    }
 }

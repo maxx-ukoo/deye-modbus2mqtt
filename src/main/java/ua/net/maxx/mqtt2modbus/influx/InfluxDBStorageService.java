@@ -3,6 +3,8 @@ package ua.net.maxx.mqtt2modbus.influx;
 import com.influxdb.client.InfluxDBClient;
 import com.influxdb.client.InfluxDBClientFactory;
 import com.influxdb.client.WriteApiBlocking;
+import com.influxdb.client.domain.HealthCheck;
+import com.influxdb.client.domain.Ready;
 import com.influxdb.client.domain.WritePrecision;
 import com.influxdb.client.write.Point;
 import java.math.BigDecimal;
@@ -26,9 +28,13 @@ public class InfluxDBStorageService implements DataListener {
 
     @Override
     public void publish(String topic, String value) {
-        Point point = Point.measurement(topic.replace("/", "_"))
-                .addField("value", new BigDecimal(value))
-                .time(Instant.now(), WritePrecision.MS);
-        writeApi.writePoint(point);
+        try {
+            Point point = Point.measurement(topic.replace("/", "_"))
+                    .addField("value", new BigDecimal(value))
+                    .time(Instant.now(), WritePrecision.MS);
+            writeApi.writePoint(point);
+        } catch (Exception e) {
+            logger.error("Error writing data to db", e);
+        }
     }
 }

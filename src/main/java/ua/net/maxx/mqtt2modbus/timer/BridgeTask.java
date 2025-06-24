@@ -17,7 +17,6 @@ public class BridgeTask extends TimerTask {
     private final List<DataListener> listeners = new ArrayList<>();
 
     private static Logger logger = LogManager.getLogger();
-
     private final MqttSender mqttSender;
     private final ModbusService modbusService;
     private final List<Device> devices;

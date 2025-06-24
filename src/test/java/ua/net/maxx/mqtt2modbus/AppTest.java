@@ -26,7 +26,7 @@ public class AppTest {
     @Ignore
     public void fullTest() throws Exception {
         Yaml yaml = new Yaml();
-        InputStream inputStream = new BufferedInputStream(new FileInputStream("config.yaml"));
+        InputStream inputStream = new BufferedInputStream(new FileInputStream("config_grid_backup.yaml"));
         Config config = yaml.loadAs(inputStream, Config.class);
 
         SerialParameters portParams = new SerialParameters();

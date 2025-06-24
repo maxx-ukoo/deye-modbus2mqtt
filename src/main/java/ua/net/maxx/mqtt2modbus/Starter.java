@@ -30,26 +30,20 @@ public class Starter {
             Yaml yaml = new Yaml();
             InputStream inputStream = new BufferedInputStream(new FileInputStream("config.yaml"));
             Config config = yaml.loadAs(inputStream, Config.class);
-
+            logger.info("Config: {}", config);
             SerialParameters portParams = new SerialParameters();
             portParams.setPortName(config.getModbus().getPort());
             portParams.setBaudRate(config.getModbus().getRate());
             portParams.setStopbits(1);
             portParams.setParity(0);
             portParams.setEncoding(Modbus.SERIAL_ENCODING_RTU);
-            MqttSender mqttSender = new MqttSenderImpl("tcp://mqtt.sng.maxx");
+            MqttSender mqttSender = new MqttSenderImpl(config.getMqtt().getUrl());
             ModbusService modbusService = new ModbusServiceImpl(portParams);
-
-            String token = "EBaj2gOeS6xuH4bba9L0R5H3qt2IXFPAfDd2CvyZJJM5Uyjoq96OE8I1c-UvdiZnT1mutcP33C8I0wbHqjHlvw==";
-            String url = "http://influx-db.sng.maxx:8086/";
-            String org = "sng-home";
-            String bucket = "energy";
-
             InfluxDBStorageService influxDb = new InfluxDBStorageService(config.getInflux());
             BridgeTask bridgeTask = new BridgeTask(mqttSender, modbusService, config);
             bridgeTask.addListener(influxDb);
             Timer timer1 = new Timer();
-            timer1.schedule(bridgeTask, Starter.getNextStartDate(), 10000);
+            timer1.schedule(bridgeTask, Starter.getNextStartDate(), config.getModbus().getPoolTime());
             logger.info("Bridge Timer scheduled");
         } catch (Exception e) {
             logger.error("Error starting app", e);
